@@ -19,9 +19,20 @@ async function order(): Promise<OrderReturn[]> {
   
   const pedidos = pedido.map((d) => ({ 
     productIds: d.productIds?.map((p) => p.id), id: d.id, userId: d.userId }));
-  console.log('******', pedidos);
   
   return pedidos;
 }
 
-export default { order };
+async function createOrder(userId: number, productIds: number[]): 
+Promise<{ userId: number, productIds: number[] }> {
+  const orders = await OrderModel.create({ userId });
+  const orderId = orders.dataValues.id;
+  // await ProductModel.update({ orderId }, { where: { id: productIds } });
+  // console.log('retorno da função >>', { productIds, userId });
+  await Promise.all(productIds.map((productId) =>
+    ProductModel.update({ orderId }, { where: { id: productId } })));
+
+  return { productIds, userId };
+}
+
+export default { order, createOrder };

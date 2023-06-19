@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import mapStatusHTTP from '../helpers/mapStatusHttp';
+import mapStatusHTTP from '../utils/mapStatusHttp';
 import login from '../service/login.service';
 
 async function logincontroller(req: Request, res: Response): Promise<Response> {

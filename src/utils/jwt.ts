@@ -7,4 +7,8 @@ const createToken = (id: number, username: string): string => {
   return token;
 };
 
-export default createToken;
+const verifyToken = (token: string): string | object => {
+  const decoded = jwt.verify(token, secret);
+  return decoded;
+};
+export default { createToken, verifyToken };

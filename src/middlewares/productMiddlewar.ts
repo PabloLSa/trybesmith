@@ -25,7 +25,28 @@ const valitdatePrice = (req: Request, res: Response, next: NextFunction):unknown
   if (price.length < 3) {
     return res.status(422).json({ message: '"price" length must be at least 3 characters long' });
   }
+
   next();
 };
 
-export default { validateName, valitdatePrice };
+const validateProductId = (req: Request, res: Response, next: NextFunction): unknown => {
+  const { productIds } = req.body;
+  if (!productIds) {
+    return res.status(400).json({ message: '"productIds" is required' });
+  }
+
+  if (!Array.isArray(productIds)) {
+    return res.status(422).json({ message: '"productIds" must be an array' });
+  }
+  if (productIds.length === 0) {
+    return res.status(422).json({ message: '"productIds" must include only numbers' });
+  }
+
+  const isNotNumber = productIds.some((productId) => typeof productId !== 'number');
+  if (isNotNumber) {
+    return res.status(422).json({ message: '"productIds" must be a number' });
+  }
+  next();
+};
+
+export default { validateName, valitdatePrice, validateProductId };
