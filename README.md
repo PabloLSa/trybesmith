@@ -22,5 +22,8 @@ O projeto Trybesmith utiliza as seguintes tecnologias:
 
 Foi uma ótima oportunidade para praticar o TypeScript e a construção de APIs Node utilizando essa linguagem.
 
+# Código com testes 
+![teste](teste.png) 
+
 Sinta-se à vontade para entrar em contato comigo caso tenha alguma dúvida, sugestão ou oportunidade de colaboração.
 
